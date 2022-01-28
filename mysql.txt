@@ -1,0 +1,218 @@
+some sql commands
+select
+update
+delete
+insert into
+create database
+alter database
+create table
+alter table
+drop table
+create index
+drop index
+
+SELECT DISTINCT
+this is select only one value in table from duplicat value
+SELECT DISTINCT City FROM Customers;
+
+The following SQL statement counts and returns the number of different (distinct) countries in the "Customers" table:
+SELECT COUNT(DISTINCT City) FROM Customers;
+
+
+//select partiqular column form table
+ 
+SELECT CustomerName, City FROM Customers;  
+
+SELECT * FROM Customers WHERE Country = 'Mexico';
+
+SELECT * FROM Customers WHERE CustomerID = 1;
+
+SELECT * FROM Products WHERE Price > 30;
+
+SELECT * FROM Products WHERE Price < 30;
+
+SELECT * FROM Products WHERE Price BETWEEN 50 AND 60;
+
+SELECT * FROM Customers WHERE City LIKE 's%';
+
+SELECT * FROM Customers WHERE City IN ('Paris','London');
+
+SELECT * FROM Customers WHERE Country = 'Germany' AND City = 'Berlin';
+
+SELECT * FROM Customers WHERE Country = 'Germany' OR City = 'Berlin';
+
+SELECT * FROM Customers WHERE NOT Country = 'Germany';
+
+SELECT * FROM Customers WHERE NOT Country = 'Germany' AND NOT Country = 'USA';
+
+SELECT * FROM Customers ORDER BY Country;
+
+SELECT * FROM Customers ORDER BY Country DESC;
+
+SELECT * FROM Customers ORDER BY Country, CustomerName;
+
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
+
+SELECT CustomerName, ContactName, Address
+FROM Customers WHERE Address IS NULL;
+
+UPDATE Customers
+SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+WHERE CustomerID = 1;
+
+UPDATE Customers
+SET PostalCode = 00000
+WHERE Country = 'Mexico';
+
+DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';
+
+SELECT * FROM Customers LIMIT 3;
+
+SELECT * FROM Customers WHERE Country='Germany' LIMIT 3;
+
+SELECT MIN(Price) AS SmallestPrice FROM Products;
+
+SELECT MAX(Price) AS LargestPrice FROM Products;
+
+SELECT COUNT(ProductID)FROM Products;
+
+SELECT AVG(Price)FROM Products;
+
+SELECT * FROM Customers WHERE CustomerName LIKE 'a%';
+
+SELECT * FROM Customers WHERE CustomerName LIKE '%a';
+
+SELECT * FROM Customers WHERE CustomerName LIKE '_r%';
+
+SELECT * FROM Customers WHERE ContactName LIKE 'a%o';
+
+SELECT * FROM Customers WHERE Country IN ('Germany', 'France', 'UK');
+
+SELECT * FROM Customers WHERE Country NOT IN ('Germany', 'France', 'UK');
+
+SELECT * FROM Customers WHERE Country IN (SELECT Country FROM Suppliers);
+
+SELECT * FROM Products
+WHERE Price BETWEEN 10 AND 20
+AND CategoryID NOT IN (1,2,3);
+
+SELECT * FROM Products
+WHERE ProductName BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni'
+ORDER BY ProductName;
+
+SELECT * FROM Products
+WHERE ProductName NOT BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni'
+ORDER BY ProductName;
+
+SELECT * FROM Orders
+WHERE OrderDate BETWEEN '1996-07-01' AND '1996-07-31';
+
+NNER JOIN: Returns records that have matching values in both tables
+LEFT JOIN: Returns all records from the left table, and the matched records from the right table
+RIGHT JOIN: Returns all records from the right table, and the matched records from the left table
+CROSS JOIN: Returns all records from both tables
+
+self join
+
+SELECT A.CustomerName AS CustomerName1, B.CustomerName AS CustomerName2, A.City
+FROM Customers A, Customers B
+WHERE A.CustomerID <> B.CustomerID
+AND A.City = B.City
+ORDER BY A.City;
+
+UNION
+
+Every SELECT statement within UNION must have the same number of columns
+The columns must also have similar data types
+The columns in every SELECT statement must also be in the same order
+
+SELECT City FROM Customers
+UNION
+SELECT City FROM Suppliers
+ORDER BY City;
+
+UNION ALL ALLOW THE DUPLICATE VALUES
+
+SELECT City FROM Customers
+UNION ALL
+SELECT City FROM Suppliers
+ORDER BY City;
+
+COMPLEX UNION
+
+SELECT City, Country FROM Customers
+WHERE Country='Germany'
+UNION
+SELECT City, Country FROM Suppliers
+WHERE Country='Germany'
+ORDER BY City; 
+
+GROUP BY
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country;
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+ORDER BY COUNT(CustomerID) DESC;
+
+GROUP BY WITH JOIN
+
+SELECT Shippers.ShipperName, COUNT(Orders.OrderID) AS NumberOfOrders FROM Orders
+LEFT JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID
+GROUP BY ShipperName;
+
+HAVING IS LIKE CONDUCTION
+
+The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5
+ORDER BY COUNT(CustomerID) DESC;
+
+SELECT Employees.LastName, COUNT(Orders.OrderID) AS NumberOfOrders
+FROM (Orders
+INNER JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID)
+GROUP BY LastName
+HAVING COUNT(Orders.OrderID) > 10;
+
+ANY 
+
+SELECT ProductName
+FROM Products
+WHERE ProductID = ANY
+  (SELECT ProductID
+  FROM OrderDetails
+  WHERE Quantity = 10);
+
+INSERT INTO
+
+INSERT INTO table2
+SELECT * FROM table1
+WHERE condition;
+
+INSERT INTO table2 (column1, column2, column3, ...)
+SELECT column1, column2, column3, ...
+FROM table1
+WHERE condition;
+
+INSERT INTO Customers (CustomerName, City, Country)
+SELECT SupplierName, City, Country FROM Suppliers;
+
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+SELECT SupplierName, ContactName, Address, City, PostalCode, Country FROM Suppliers;
+
+INSERT INTO Customers (CustomerName, City, Country)
+SELECT SupplierName, City, Country FROM Suppliers
+WHERE Country='Germany';
+

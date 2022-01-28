@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head><title>This Is My First Page</title>
+</head>
+
+<script>
+
+var name = "vivek"
+var age = 23
+const d = new Date();
+let day = d.getDate();
+let day1 = d.getDay();
+let day2 = d.getFullYear();
+let day3 = d.getHours();
+let day4 = d.getSeconds();
+let day5 = d.getMilliseconds();
+let day6 = d.getMinutes();
+let day7 = d.getMonth();
+let day8 =d.setDate();
+alert();
+
+
+</script>
+
+<body>
+<!--<h1>Hello World....!</h1>--->
+<!--<a href="https://www.google.com/">TO SEACH IN WEB </a> -->
+
+</body>
+</html>

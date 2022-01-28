@@ -1,0 +1,4 @@
+php artisan make:migration create_table_name_table --create="table_name"
+
+ DB::insert('insert into migrations (migration,batch) values (?, ?)', ['vivek',2]);
+

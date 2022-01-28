@@ -1,0 +1,10 @@
+git init
+git --version
+git config --global user.name username
+git config --global user.email email
+git congif user.name (to logg into git)
+git status
+git add file.extnation
+git rm --cached  file.extnation
+git add .( add all file)
+git commit -m "Descriptive of commit"
