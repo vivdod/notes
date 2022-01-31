@@ -8,3 +8,22 @@ git add file.extnation
 git rm --cached  file.extnation
 git add .( add all file)
 git commit -m "Descriptive of commit"
+git log  --oneline
+
+checkout commit
+revert commit
+reset commit
+
+git checkout idnumber
+
+shift :
+wq
+git reset idnumber
+git reset idnumber --hard
+git branch branchname
+git brach -a to show all branch
+git checkout branchname
+git branch -d //-D branchname to delete branch
+git merge brachname
+
+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
